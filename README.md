@@ -3,4 +3,4 @@ This project is a Disease Prediction App that utilizes machine learning and deep
 
 # Features
 Machine Learning Models: Trained models predict diseases based on symptoms provided by the user. Interactive Frontend: HTML forms and JavaScript enable dynamic interaction for symptom input and prediction results. CSS Styling: Custom styling enhances the visual appeal and usability of the application.
-click here:https://diseaseprediction-gbp6d9mz7yvpvxl6mfcgyj.streamlit.app/
+click here::[https://diseaseprediction-dtrwdkumcfccl2ssy6lrdk.streamlit.app/](https://diseaseprediction-dtrwdkumcfccl2ssy6lrdk.streamlit.app/)
