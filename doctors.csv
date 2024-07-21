@@ -1,0 +1,44 @@
+Disease,Doctor Name,Specialization,Contact,Address,Email,Photo_url
+Fungal infection,Dr. Ayesha Kumar,Dermatologist,555-1234-123,"Health St, Mumbai, Maharashtra, India",ayesha.kumar@healthcare.com
+Allergy,Dr. Rohan Mehta,Allergist,555-5678-456,"Allergy Rd, Delhi, India",rohan.mehta@allergycare.com
+GERD,Dr. Aarav Sharma,Gastroenterologist,555-8765-789,"Digestive Ln, Bangalore, Karnataka, India",aarav.sharma@gastrocare.com
+Chronic cholestasis,Dr. Pooja Singh,Hepatologist,555-2345-321,"Liver Ave, Hyderabad, Telangana, India",pooja.singh@hepatologycare.com
+Drug Reaction,Dr. Arjun Patel,Immunologist,555-3456-654,"Immune Blvd, Chennai, Tamil Nadu, India",arjun.patel@immunocare.com
+Peptic ulcer disease,Dr. Sanya Nair,Gastroenterologist,555-4567-987,"Ulcer Way, Kolkata, West Bengal, India",sanya.nair@gastrocare.com
+AIDS,Dr. Rajesh Gupta,Infectious Disease Specialist,555-6789-111,"Infection St, Pune, Maharashtra, India",rajesh.gupta@infectiouscare.com
+Diabetes,Dr. Manish Verma,Endocrinologist,555-7890-222,"Sugar Ln, Jaipur, Rajasthan, India",manish.verma@endocrinecare.com
+Gastroenteritis,Dr. Kavita Rao,Gastroenterologist,555-8901-333,"Stomach Blvd, Ahmedabad, Gujarat, India",kavita.rao@gastrocare.com
+Bronchial Asthma,Dr. Anjali Malhotra,Pulmonologist,555-9012-444,"Lung St, Surat, Gujarat, India",anjali.malhotra@pulmocare.com
+Hypertension,Dr. Vikram Iyer,Cardiologist,555-0123-555,"Heart Rd, Lucknow, Uttar Pradesh, India",vikram.iyer@cardiocare.com
+Migraine,Dr. Nisha Roy,Neurologist,555-1230-666,"Brain Ave, Kanpur, Uttar Pradesh, India",nisha.roy@neurocare.com
+Cervical spondylosis,Dr. Ramesh Kaur,Orthopedist,555-2340-777,"Spine St, Nagpur, Maharashtra, India",ramesh.kaur@orthocare.com
+Paralysis (brain hemorrhage),Dr. Leela Joshi,Neurologist,555-3450-888,"Stroke Rd, Indore, Madhya Pradesh, India",leela.joshi@neurocare.com
+Jaundice,Dr. Amit Dubey,Hepatologist,555-4560-999,"Yellow Ave, Thane, Maharashtra, India",amit.dubey@hepatologycare.com
+Malaria,Dr. Sneha Desai,Infectious Disease Specialist,555-5670-101,"Malaria Ln, Bhopal, Madhya Pradesh, India",sneha.desai@infectiouscare.com
+Chicken pox,Dr. Vishal Pillai,Dermatologist,555-6780-202,"Pox Rd, Patna, Bihar, India",vishal.pillai@dermatologycare.com
+Dengue,Dr. Kiran Pandey,Infectious Disease Specialist,555-7891-303,"Dengue Blvd, Ludhiana, Punjab, India",kiran.pandey@infectiouscare.com
+Typhoid,Dr. Poonam Aggarwal,Infectious Disease Specialist,555-8902-404,"Typhoid St, Agra, Uttar Pradesh, India",poonam.aggarwal@infectiouscare.com
+Hepatitis A,Dr. Sameer Prasad,Hepatologist,555-9013-505,"Hepatitis Ave, Nashik, Maharashtra, India",sameer.prasad@hepatologycare.com
+Hepatitis B,Dr. Smita Kulkarni,Hepatologist,555-0124-606,"B Virus Rd, Faridabad, Haryana, India",smita.kulkarni@hepatologycare.com
+Hepatitis C,Dr. Kunal Shetty,Hepatologist,555-1231-707,"C Virus Blvd, Meerut, Uttar Pradesh, India",kunal.shetty@hepatologycare.com
+Hepatitis D,Dr. Neha Bhatt,Hepatologist,555-2341-808,"D Virus Ln, Rajkot, Gujarat, India",neha.bhatt@hepatologycare.com
+Hepatitis E,Dr. Alok Kapoor,Hepatologist,555-3451-909,"E Virus Ave, Varanasi, Uttar Pradesh, India",alok.kapoor@hepatologycare.com
+Alcoholic hepatitis,Dr. Trisha Mahajan,Hepatologist,555-4561-111,"Alcohol Blvd, Srinagar, Jammu and Kashmir, India",trisha.mahajan@hepatologycare.com
+Tuberculosis,Dr. Deepak Reddy,Infectious Disease Specialist,555-5671-222,"TB St, Amritsar, Punjab, India",deepak.reddy@infectiouscare.com
+Common Cold,Dr. Swati Jain,General Practitioner,555-6781-333,"Cold Rd, Allahabad, Uttar Pradesh, India",swati.jain@generalcare.com
+Pneumonia,Dr. Navin Bansal,Pulmonologist,555-7892-444,"Pneumonia Ln, Ranchi, Jharkhand, India",navin.bansal@pulmocare.com
+Dimorphic hemorrhoids (piles),Dr. Priya Sood,Proctologist,555-8903-555,"Hemorrhoid St, Howrah, West Bengal, India",priya.sood@proctocare.com
+Heart attack,Dr. Suraj Ghosh,Cardiologist,555-9014-666,"Heart Attack Ave, Coimbatore, Tamil Nadu, India",suraj.ghosh@cardiocare.com
+Varicose veins,Dr. Anupama Dutta,Vascular Surgeon,555-0125-777,"Vein Blvd, Jabalpur, Madhya Pradesh, India",anupama.dutta@vascularcare.com
+Hypothyroidism,Dr. Tarun Chauhan,Endocrinologist,555-1232-888,"Thyroid St, Gwalior, Madhya Pradesh, India",tarun.chauhan@endocrinecare.com
+Hyperthyroidism,Dr. Anjali Thakur,Endocrinologist,555-2342-999,"Hyperthyroid Ln, Vijayawada, Andhra Pradesh, India",anjali.thakur@endocrinecare.com
+Hypoglycemia,Dr. Ritu Rathi,Endocrinologist,555-3452-101,"Hypoglycemia Rd, Mysore, Karnataka, India",ritu.rathi@endocrinecare.com
+Osteoarthritis,Dr. Vinayak Bhat,Rheumatologist,555-4562-202,"Arthritis Ave, Kota, Rajasthan, India",vinayak.bhat@rheumatologycare.com
+Arthritis,Dr. Pankaj Goel,Rheumatologist,555-5672-303,"Joint St, Guwahati, Assam, India",pankaj.goel@rheumatologycare.com
+(vertigo) Paroxysmal Positional Vertigo,Dr. Kavya Krishnan,Neurologist,555-6782-404,"Vertigo Blvd, Chandigarh, India",kavya.krishnan@neurocare.com
+Acne,Dr. Prashant Jha,Dermatologist,555-7893-505,"Acne Ln, Bareilly, Uttar Pradesh, India",prashant.jha@dermatologycare.com
+Urinary tract infection,Dr. Ananya Sen,Urologist,555-8904-606,"UTI Rd, Aligarh, Uttar Pradesh, India",ananya.sen@urologycare.com
+Psoriasis,Dr. Meena Nair,Dermatologist,555-9015-707,"Psoriasis Blvd, Jodhpur, Rajasthan, India",meena.nair@dermatologycare.com
+Impetigo,Dr. Raghav Sinha,Dermatologist,555-0126-808,"Malviya Nagar, Jaipur, Rajasthan, India",raghav.sinha@dermatologycare.com
+Heart disease,Dr. Ram patel,heart specialist,333-4354-132,"jp road,delhi,India",ram784@gmail.com
+Diabetes,,Dr. Amit Dubey,health expert,555-4560-999,"Yellow Ave, Thane, Maharashtra, India",amit.dubey@hepatologycare.com
