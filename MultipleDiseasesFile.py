@@ -19,7 +19,14 @@ from tensorflow.keras.preprocessing import image
 import numpy as np
 import wikipedia 
 import streamlit.components.v1 as components
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from dotenv import load_dotenv
+import os
 
+# Load environment variables from .env file
+load_dotenv()
 
 
 # Set page configuration
@@ -238,7 +245,23 @@ def start():
         st.session_state.page = 'select'
         st.rerun() 
 
+def send_email(to, subject, message):
+    from_email = os.getenv('EMAIL_ADDRESS')
+    from_password = os.getenv('EMAIL_PASSWORD')
 
+    msg = MIMEMultipart()
+    msg['From'] = from_email
+    msg['To'] = to
+    msg['Subject'] = subject
+
+    msg.attach(MIMEText(message, 'plain'))
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(from_email, from_password)
+    text = msg.as_string()
+    server.sendmail(from_email, to, text)
+    server.quit()
 # Function to get doctor information based on disease
 def get_doctor_info(disease):
     try:
@@ -425,6 +448,10 @@ def form_function(disease):
                             }
                             save_appointment_to_csv(appointment_data, csv_file)
                             st.success(f"Appointment requested for {name} with Dr. {doctor_info['Doctor Name']} on {date} at {time}.")
+                            email_subject = "Appointment Confirmation"
+                            email_message = f"Dear {name},\n\nYour appointment with Dr. {doctor_info['Doctor Name']} has been scheduled for {date} at {time}.\n\nThank you."
+
+                            send_email(email, email_subject, email_message)
                             delay.sleep(3)
                             st.session_state.formbtn_state = False                           
                             st.rerun()
@@ -605,7 +632,7 @@ def diabetes_result_page():
         if formbtn or st.session_state.formbtn_state:
             st.session_state.formbtn_state = True
             form_function("Diabetes")
-            st.session_state.formbtn_state = False  
+           
     else:
         st.success("The person is not likely to have diabetes.")
         components.html(no_disease_image, height=400)
@@ -629,7 +656,7 @@ def heart_result_page():
         if formbtn or st.session_state.formbtn_state:
             st.session_state.formbtn_state = True
             form_function("Heart disease")
-            st.session_state.formbtn_state = False 
+           
     else:
         st.success("The person is not likely to have heart disease.")
         components.html(no_disease_image,height=400)
@@ -652,7 +679,7 @@ def framingham_result_page():
         if formbtn or st.session_state.formbtn_state:
             st.session_state.formbtn_state = True
             form_function("Heart disease")
-            st.session_state.formbtn_state = False 
+           
     else:
         st.success("The person is not likely to have Cardiovascular Disease.")
         
