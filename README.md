@@ -45,7 +45,7 @@ Follow the latest research and advancements in ML and DL applied to healthcare t
 Ensure that your system complies with data protection regulations and handles sensitive information securely.
 
 
-# Overall, this project can be a comprehensive and impactful and their application to real-world problems.
+# Overall, this project can be a comprehensive, impactful and their application to real-world problems.
 
 
 
