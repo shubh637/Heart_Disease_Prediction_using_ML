@@ -1,3 +1,11 @@
+# Multiple Disease Prediction System.
+![Home page](https://github.com/shubh637/Disease_prediction/blob/main/website%20example%20images/Screenshot%202024-07-29%20164357.png)
+![disease prediction](https://github.com/shubh637/Disease_prediction/blob/main/website%20example%20images/Screenshot%202024-07-29%20164541.png)
+![diabetics prediction](https://github.com/shubh637/Disease_prediction/blob/main/website%20example%20images/Screenshot%202024-07-29%20164613.png)
+![heart disease](https://github.com/shubh637/Disease_prediction/blob/main/website%20example%20images/Screenshot%202024-07-29%20164639.png)
+![other](https://github.com/shubh637/Disease_prediction/blob/main/website%20example%20images/Screenshot%202024-07-29%20164922.png)
+
+
 # Why It’s a Good Choice:
 
 ## Relevance and Impact:
@@ -45,7 +53,7 @@ Follow the latest research and advancements in ML and DL applied to healthcare t
 Ensure that your system complies with data protection regulations and handles sensitive information securely.
 
 
-# Overall, this project can be a comprehensive, impactful and their application to real-world problems.
+# Overall, this project can be a comprehensive and impactful choice, showcasing your skills in ML, DL, and their application to real-world problems.
 
 
 
@@ -54,6 +62,4 @@ Ensure that your system complies with data protection regulations and handles se
 
 
 
-
-here is the link:https://diseaseprediction-rzjuyyucpc4ucyprpxgrjc.streamlit.app/
-
+#### here is the link:https://diseaseprediction-rzjuyyucpc4ucyprpxgrjc.streamlit.app/
