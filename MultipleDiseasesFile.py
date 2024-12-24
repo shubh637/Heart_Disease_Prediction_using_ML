@@ -306,7 +306,7 @@ def form_function(disease):
             if submit_button:
                 # Validation
                 email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-                contact_regex = r'^\d{10}$'  # Assumes a 10-digit phone number format
+                contact_regex = r'^\d{10}$'  
 
                 if not name:
                     st.error("Please enter your name.")
