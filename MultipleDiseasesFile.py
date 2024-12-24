@@ -24,6 +24,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from dotenv import load_dotenv
 import os
+import re
 
 # Load environment variables from .env file
 load_dotenv()
@@ -105,6 +106,7 @@ def save_test_history(username, disease, timestamp, result, dataframe):
               (username, disease, timestamp, result, symptoms_json))
     conn.commit()
     conn.close()
+#functions to clear and display history.  
 def clear_history():
     conn = sqlite3.connect('your_database.db')
     c = conn.cursor()
@@ -215,6 +217,130 @@ if 'page' not in st.session_state:
 st.markdown(page_bg_img, unsafe_allow_html=True)
 st.title("Disease Prediction System")
 
+#function to send email to user.
+def send_email(to, subject, message):
+    from_email = os.getenv('EMAIL_ADDRESS')
+    from_password = os.getenv('EMAIL_PASSWORD')
+
+    msg = MIMEMultipart()
+    msg['From'] = from_email
+    msg['To'] = to
+    msg['Subject'] = subject
+
+    msg.attach(MIMEText(message, 'plain'))
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(from_email, from_password)
+    text = msg.as_string()
+    server.sendmail(from_email, to, text)
+    server.quit()
+# Function to get doctor information based on disease
+def get_doctor_info(disease):
+    try:
+        doctors = doctor_df[doctor_df['Disease'] == disease]
+        if not doctors.empty:
+            return doctors.to_dict('records')[0]  # Return the first matching doctor as a dictionary
+        else:
+            return {"error": "No doctors found for this disease"}
+    except Exception as e:
+        return {"error": str(e)}
+#function to save doctor's appointment.      
+def save_appointment_to_csv(data, csv_file):
+    # Convert the data dictionary to a DataFrame with one row
+    new_data = pd.DataFrame([data])
+    
+    try:
+        # Read the existing CSV file
+        df = pd.read_csv(csv_file)
+        # Append the new data to the existing DataFrame
+        df = pd.concat([df, new_data], ignore_index=True)
+    except FileNotFoundError:
+        # If the file does not exist, create a new DataFrame from the new data
+        df = new_data
+    
+    # Save the updated DataFrame to the CSV file
+    df.to_csv(csv_file, index=False)
+#function to save user information for appointment.
+def form_function(disease):
+    default_photo_url = "https://via.placeholder.com/50"  # URL of the default image
+    csv_file = "./data and predictions/paitent_appointments.csv"
+    doctor_info = get_doctor_info(disease)
+
+    if doctor_info and "error" not in doctor_info:
+        # Display appointment form
+        st.title("Appointment Form")
+        with st.form(key='appointment_form'):
+            st.subheader("Doctor Information:")
+            col1, col2 = st.columns(2)
+
+            photo_url = doctor_info.get("Photo", default_photo_url)
+            with col2:
+                if not photo_url:
+                    photo_url = default_photo_url
+                st.image(photo_url, caption=f"Dr. {doctor_info['Doctor Name']}", width=300)  # Adjust width for smaller image
+            with col1:
+                for key, value in doctor_info.items():
+                    if key != "Photo_url":  # Skip the photo key while displaying other information
+                        st.write(f"**{key}:** {value}")
+
+            st.subheader("Make an Appointment:")
+            name = st.text_input("Your Name", key="name")
+            contact = st.text_input("Your Contact", key="contact")
+            email = st.text_input("Your Email", key="email")
+            date = st.date_input("Preferred Appointment Date", key="date")
+            time = st.time_input("Preferred Appointment Time", key="time")
+            col1, col2 = st.columns(2)
+
+            with col1:
+                submit_button = st.form_submit_button(label='Submit')
+            with col2:
+                close_button = st.form_submit_button(label='Close')
+
+            if close_button:
+                st.success("Closing the Form")
+                delay.sleep(2)
+                st.session_state.formbtn_state = False
+                st.rerun()
+
+            if submit_button:
+                # Validation
+                email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+                contact_regex = r'^\d{10}$'  # Assumes a 10-digit phone number format
+
+                if not name:
+                    st.error("Please enter your name.")
+                elif  not contact or not re.match(contact_regex, contact) :
+                    st.error("Please enter a valid 10-digit contact number.")
+                elif not email or not re.match(email_regex, email) :
+                    st.error("Please enter a valid email address.")
+                else:
+                    # Save and send email
+                    appointment_data = {
+                        "Disease": disease,
+                        "Doctor Name": doctor_info["Doctor Name"],
+                        "Specialization": doctor_info["Specialization"],
+                        "Contact": doctor_info["Contact"],
+                        "Address": doctor_info["Address"],
+                        "Email": doctor_info["Email"],
+                        "Patient Name": name,
+                        "Patient Contact": contact,
+                        "Patient Email": email,
+                        "Appointment Date": date.strftime("%Y-%m-%d"),
+                        "Appointment Time": time.strftime("%H:%M:%S")
+                    }
+                    save_appointment_to_csv(appointment_data, csv_file)
+                    email_subject = "Appointment Confirmation"
+                    email_message = f"Dear {name},\n\nYour appointment with Dr. {doctor_info['Doctor Name']} has been scheduled for {date} at {time}.\n\nThank you."
+
+                    send_email(email, email_subject, email_message)
+                    st.success(f"Appointment requested for {name} with Dr. {doctor_info['Doctor Name']} on {date} at {time}.")
+                    delay.sleep(2)
+                    st.session_state.formbtn_state = False
+                    st.rerun()
+    else:
+        st.error(doctor_info["error"])
+#Initial page
 def start():
     #sidebar for navigation
     with st.sidebar:
@@ -244,49 +370,7 @@ def start():
         st.session_state.token = None
         st.session_state.page = 'select'
         st.rerun() 
-
-def send_email(to, subject, message):
-    from_email = os.getenv('EMAIL_ADDRESS')
-    from_password = os.getenv('EMAIL_PASSWORD')
-
-    msg = MIMEMultipart()
-    msg['From'] = from_email
-    msg['To'] = to
-    msg['Subject'] = subject
-
-    msg.attach(MIMEText(message, 'plain'))
-
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(from_email, from_password)
-    text = msg.as_string()
-    server.sendmail(from_email, to, text)
-    server.quit()
-# Function to get doctor information based on disease
-def get_doctor_info(disease):
-    try:
-        doctors = doctor_df[doctor_df['Disease'] == disease]
-        if not doctors.empty:
-            return doctors.to_dict('records')[0]  # Return the first matching doctor as a dictionary
-        else:
-            return {"error": "No doctors found for this disease"}
-    except Exception as e:
-        return {"error": str(e)}
-def save_appointment_to_csv(data, csv_file):
-    # Convert the data dictionary to a DataFrame with one row
-    new_data = pd.DataFrame([data])
-    
-    try:
-        # Read the existing CSV file
-        df = pd.read_csv(csv_file)
-        # Append the new data to the existing DataFrame
-        df = pd.concat([df, new_data], ignore_index=True)
-    except FileNotFoundError:
-        # If the file does not exist, create a new DataFrame from the new data
-        df = new_data
-    
-    # Save the updated DataFrame to the CSV file
-    df.to_csv(csv_file, index=False)
+  
 def any_disease():
     
     # Define symptoms and diseases
@@ -388,81 +472,6 @@ def any_disease():
                 st.warning(f"No information found for '{h}' on Wikipedia.") 
         # Fetch doctor information
         form_function(h)
-        
-
-def form_function(disease):
-        default_photo_url = "https://via.placeholder.com/50"  # URL of the default image
-        csv_file="./data and predictions/paitent_appointments.csv"
-        doctor_info = get_doctor_info(disease)
-
-        if doctor_info and "error" not in doctor_info:
-            
-        
-        # Display appointment form
-            st.title("Appointment Form")
-            with st.form(key='appointment_form'):
-                st.subheader("Doctor Information:")
-                col1,col2=st.columns(2)
-           
-                photo_url = doctor_info.get("Photo", default_photo_url)
-                with col2:
-                    if not photo_url:
-                        photo_url = default_photo_url
-        
-                    st.image(photo_url, caption=f"Dr. {doctor_info['Doctor Name']}", width=300)  # Adjust width for smaller image
-                with col1:
-                    for key, value in doctor_info.items():
-                        if key != "Photo_url":  # Skip the photo key while displaying other information
-                            st.write(f"**{key}:** {value}")
-                st.subheader("Make an Appointment:")
-                name = st.text_input("Your Name", key="name")
-                contact = st.text_input("Your Contact", key="contact")
-                email = st.text_input("Your Email", key="email")
-                date = st.date_input("Preferred Appointment Date", key="date")
-                time = st.time_input("Preferred Appointment Time", key="time")
-                col1,col2=st.columns(2)
-                with col1:    
-                    submit_button = st.form_submit_button(label='Submit')
-                with col2:    
-                    close_button = st.form_submit_button(label='Close')
-                if close_button:
-                    st.success(f"Closing the Form")
-                    delay.sleep(2)
-                    st.session_state.formbtn_state = False                           
-                    st.rerun()
-                if submit_button:
-                        if name and contact and email:    
-                            
-                            appointment_data = {
-                                "Disease": disease,
-                                "Doctor Name": doctor_info["Doctor Name"],
-                                "Specialization": doctor_info["Specialization"],
-                                "Contact": doctor_info["Contact"],
-                                "Address": doctor_info["Address"],
-                                "Email": doctor_info["Email"],
-                                "Patient Name": name,
-                                "Patient Contact": contact,
-                                "Patient Email": email,
-                                "Appointment Date": date.strftime("%Y-%m-%d"),
-                                "Appointment Time": time.strftime("%H:%M:%S")
-                            }
-                            save_appointment_to_csv(appointment_data, csv_file)
-                            st.success(f"Appointment requested for {name} with Dr. {doctor_info['Doctor Name']} on {date} at {time}.")
-                            email_subject = "Appointment Confirmation"
-                            email_message = f"Dear {name},\n\nYour appointment with Dr. {doctor_info['Doctor Name']} has been scheduled for {date} at {time}.\n\nThank you."
-
-                            send_email(email, email_subject, email_message)
-                            delay.sleep(3)
-                            st.session_state.formbtn_state = False                           
-                            st.rerun()
-                            
-                           
-                        else:
-                            st.error("Please fill in all fields.")   
-
-        else: 
-            st.error(doctor_info["error"])
-
 def diabetes_prediction_page():
     components.html(second_page_image,height=600)
     st.title("Diabetes Prediction using ML")
