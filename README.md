@@ -55,15 +55,9 @@ Ensure that your system complies with data protection regulations and handles se
 
 # Overall, this project can be a comprehensive and impactful choice, showcasing your skills in ML, DL, and their application to real-world problems.
 
+### here is the link for live project:
+#### username:example
+#### password:example1
 
+[![Project](https://img.shields.io/badge/Visit-APP-orange?style=for-the-badge)](https://diseaseprediction-rzjuyyucpc4ucyprpxgrjc.streamlit.app/)
 
-
-
-
-
-
-#### here is the link:https://diseaseprediction-rzjuyyucpc4ucyprpxgrjc.streamlit.app/
-
-### use these for login:
-#### username:s
-#### password:s
